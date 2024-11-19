@@ -4,6 +4,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_login import LoginManager
 
+from after_request import after_request_bp
 from app_config import set_app_configs
 from database.models.users_model import UsersModel
 from database.shared_db import db
@@ -16,6 +17,7 @@ from routes.weapons_api import weapon_bp
 app = Flask(__name__)
 login_manager = LoginManager(app)
 app.register_blueprint(error_handler_bp)
+app.register_blueprint(after_request_bp)
 app.register_blueprint(weapon_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(logout_bp)
