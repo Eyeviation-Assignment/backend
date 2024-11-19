@@ -1,0 +1,5 @@
+Flask~=3.0.0
+Flask-SQLAlchemy
+argon2-cffi==23.1.0
+SQLAlchemy~=2.0.25
+Werkzeug~=3.0.1

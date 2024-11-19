@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0  # Use the official MySQL image
+    container_name: eyeviation  # Set the container name
+    ports:
+      - "3306:3306"  # Map the MySQL port to the host
+    environment:
+      MYSQL_ROOT_PASSWORD: password  # Root password
+      MYSQL_USER: user               # Non-root user
+      MYSQL_PASSWORD: password       # Password for the non-root user
+      MYSQL_DATABASE: eyeviation     # Database name
