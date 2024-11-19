@@ -3,9 +3,11 @@ import traceback
 from http import HTTPStatus
 
 from flask import Blueprint
+from werkzeug.exceptions import Unauthorized
 
 from DTOs.exception_dto import ExceptionDTO
 from exceptions.bad_request_exception import BadRequestException
+from exceptions.forbidden_exception import ForbiddenException
 
 error_handler_bp = Blueprint('error_handler', __name__)
 
@@ -17,20 +19,19 @@ def general_exception(e: Exception):
     return ExceptionDTO(HTTPStatus.INTERNAL_SERVER_ERROR.value, 'Internal Server Error').to_dict(), HTTPStatus.INTERNAL_SERVER_ERROR.value
 
 
-# @error_handler_bp.app_errorhandler(InvalidCredentialsException)
-# @error_handler_bp.app_errorhandler(Unauthorized)
-# def not_found_exception(e: InvalidCredentialsException):
-#     error_message: str = str(e)
-#     if isinstance(e, Unauthorized):
-#         error_message = 'check your credentials.'
-#     logging.error(f'Unauthorized. Exception type: {type(e)}. Exception message: {error_message}')
-#     return ExceptionDTO(HTTPStatus.UNAUTHORIZED.value, 'Unauthorized', error_message).to_dict(), HTTPStatus.UNAUTHORIZED.value
-#
-#
-# @error_handler_bp.app_errorhandler(ForbiddenException)
-# def forbidden_exception(e: InvalidCredentialsException):
-#     logging.error(f'Forbidden. Exception type: {type(e)}. Exception message: {str(e)}')
-#     return ExceptionDTO(HTTPStatus.FORBIDDEN.value, 'Forbidden', str(e)).to_dict(), HTTPStatus.FORBIDDEN.value
+@error_handler_bp.app_errorhandler(Unauthorized)
+def not_found_exception(e: Unauthorized):
+    error_message: str = str(e)
+    if isinstance(e, Unauthorized):
+        error_message = 'check your credentials.'
+    logging.error(f'Unauthorized. Exception type: {type(e)}. Exception message: {error_message}')
+    return ExceptionDTO(HTTPStatus.UNAUTHORIZED.value, 'Unauthorized', error_message).to_dict(), HTTPStatus.UNAUTHORIZED.value
+
+
+@error_handler_bp.app_errorhandler(ForbiddenException)
+def forbidden_exception(e: ForbiddenException):
+    logging.error(f'Forbidden. Exception type: {type(e)}. Exception message: {str(e)}')
+    return ExceptionDTO(HTTPStatus.FORBIDDEN.value, 'Forbidden', str(e)).to_dict(), HTTPStatus.FORBIDDEN.value
 #
 #
 # @error_handler_bp.app_errorhandler(NotFoundException)

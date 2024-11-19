@@ -9,6 +9,7 @@ class WeaponsModel(db.Model):
     model = db.Column(db.String(255), nullable=False)
 
     weapons_to_customizations_model = db.relationship('WeaponsToCustomizationsModel', back_populates='weapon_model')
+    saved_weapon_model = db.relationship('SavedWeaponsModel', back_populates='weapon_model')
 
     def convert_to_entity(self) -> Weapon:
         return Weapon(

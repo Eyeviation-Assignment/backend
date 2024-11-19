@@ -4,7 +4,7 @@ from DTOs.customize_dto import CustomizationDTO
 from DTOs.weapons_dto import WeaponDTO, WeaponsResponseDTO, WeaponWithCustomizationsResponseDTO
 from database.db_methods.weapons_db_methods import WeaponsDbMethods
 from database.db_methods.weapons_to_customizations_db_methods import WeaponsToCustomizationsDbMethods
-from entities.WeaponWithCustomization import WeaponWithCustomization
+from entities.weapon_with_customization import WeaponWithCustomization
 from entities.weapon import Weapon
 from enums.cutomizations_enum import CustomizationTypesEnum
 

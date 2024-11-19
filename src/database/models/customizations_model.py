@@ -1,5 +1,5 @@
 from database.shared_db import db
-from entities.Customization import Customization
+from entities.customization import Customization
 from enums.cutomizations_enum import CustomizationTypesEnum
 
 
@@ -12,6 +12,8 @@ class CustomizationsModel(db.Model):
     db.UniqueConstraint('customization_type', 'customization_model', name='unique_customization_type_per_model'),
 
     weapons_to_customizations_model = db.relationship('WeaponsToCustomizationsModel', back_populates='customization_model')
+    saved_customization_model = db.relationship('SavedCustomizationsModel', back_populates='customization_model')
+
     # Relationship to Weapon (optional, allows easy access to associated weapon)
     # weapon = db.relationship('Weapon', backref=db.backref('customizations', lazy=True))
 

@@ -2,8 +2,8 @@ from flask_sqlalchemy.query import Query
 
 from database.models.weapons_to_customizations_model import WeaponsToCustomizationsModel
 from database.shared_db import db
-from entities.Customization import Customization
-from entities.WeaponWithCustomization import WeaponWithCustomization
+from entities.customization import Customization
+from entities.weapon_with_customization import WeaponWithCustomization
 from enums.cutomizations_enum import CustomizationTypesEnum
 
 
