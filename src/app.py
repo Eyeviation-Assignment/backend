@@ -9,6 +9,7 @@ from app_config import set_app_configs
 from database.models.users_model import UsersModel
 from database.shared_db import db
 from exceptions.exceptions_config import error_handler_bp
+from routes.auth_api import auth_bp
 from routes.customize_api import customize_bp
 from routes.login_api import login_bp
 from routes.logout_api import logout_bp
@@ -21,6 +22,7 @@ app.register_blueprint(after_request_bp)
 app.register_blueprint(weapon_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(logout_bp)
+app.register_blueprint(auth_bp)
 app.register_blueprint(customize_bp)
 CORS(app, resources={r"/*": {"origins": 'http://localhost:3000'}}, supports_credentials=True)
 

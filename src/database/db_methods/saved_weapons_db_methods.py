@@ -19,12 +19,12 @@ class SavedWeaponsDbMethods:
         return model.convert_to_entity()
 
     @staticmethod
-    def get_saved_weapon_with_customizations(saved_weapon_id: str) -> SavedWeapon:
+    def get_saved_weapon_with_customizations(saved_weapon_id: str) -> Optional[SavedWeapon]:
         saved_weapon_model = db.session.query(SavedWeaponsModel).options(
             joinedload(SavedWeaponsModel.weapon_model),
             joinedload(SavedWeaponsModel.saved_customization_models)
-        ).filter_by(id=saved_weapon_id).first()
-        return saved_weapon_model.convert_to_entity()
+        ).filter(SavedWeaponsModel.id == saved_weapon_id).first()
+        return saved_weapon_model.convert_to_entity() if saved_weapon_model else None
 
     @staticmethod
     def get_saved_weapons(user_id: str) -> list[SavedWeapon]:

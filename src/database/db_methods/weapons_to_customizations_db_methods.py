@@ -1,3 +1,5 @@
+from typing import Optional
+
 from flask_sqlalchemy.query import Query
 
 from database.models.weapons_to_customizations_model import WeaponsToCustomizationsModel
@@ -10,11 +12,11 @@ from enums.cutomizations_enum import CustomizationTypesEnum
 class WeaponsToCustomizationsDbMethods:
 
     @staticmethod
-    def get_weapon_with_customization(weapon_id: str) -> WeaponWithCustomization:
+    def get_weapon_with_customization(weapon_id: str) -> Optional[WeaponWithCustomization]:
         query: Query = db.session.query(WeaponsToCustomizationsModel).filter_by(weapon_id=weapon_id)
         weapon_to_customization_models: list[WeaponsToCustomizationsModel] = query.all()
         if not weapon_to_customization_models:
-            raise Exception(f'No records')  # todo: no time but should be a specific error
+            raise None
         return WeaponWithCustomization(weapon=weapon_to_customization_models[0].weapon_model.convert_to_entity(),
                                        customizations=WeaponsToCustomizationsDbMethods._type_to_customizations(weapon_to_customization_models))
 

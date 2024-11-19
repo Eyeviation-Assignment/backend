@@ -26,6 +26,8 @@ class SavedCustomizationsDbMethods:
         """
         Hard delete
         """
+        print(f"Deleting records for saved_weapon_id: {saved_weapon_id}")
         result: int = db.session.query(SavedCustomizationsModel).filter(SavedCustomizationsModel.saved_weapon_id == saved_weapon_id).delete()
         db.session.commit()
+        print(f'deleted {result} rows')
         return result > 0
