@@ -20,6 +20,8 @@ def get_weapons():
 @weapon_bp.route('/weapons/<weapon_id>', methods=['GET'])
 def get_weapon_with_parts(weapon_id):
     weapon_with_customization: WeaponWithCustomization = WeaponsToCustomizationsDbMethods.get_weapon_with_customization(weapon_id)
+    if not weapon_with_customization:
+        raise Exception(f'No records')  # todo: no time but should be a specific error 404
     return _convert_to_weapon_with_customizations_dto(weapon_with_customization)
 
 
