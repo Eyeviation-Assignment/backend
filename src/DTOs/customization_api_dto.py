@@ -26,3 +26,14 @@ class CustomizationResponseDTO(DataClassJsonMixin):
     saved_weapon_id: str
     saved_customizations: list[CustomizationDTO]
     saved_weapon: WeaponDTO
+
+
+@dataclass
+class SavedWeaponDTO(DataClassJsonMixin):
+    id: str
+    weapon: WeaponDTO
+
+
+@dataclass
+class SavedWeaponsAllResponseDTO(DataClassJsonMixin):
+    weapons: list[SavedWeaponDTO]
